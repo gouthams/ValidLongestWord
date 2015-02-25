@@ -1,0 +1,51 @@
+import static org.junit.Assert.*;
+
+import java.util.HashSet;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+// Few sample TestCases 
+public class ValidLongestWordTest {
+
+	HashSet<String> dictionary = new HashSet<String>();
+
+	@Before
+	public void setUp() throws Exception {
+		// Adding few words to dictonary to validate test cases
+		dictionary.add("good");
+		dictionary.add("gooddayfriend"); // duplicate entries
+		dictionary.add("gooddayfriend"); 
+		dictionary.add("frienddaygood"); // same sized valid entry 
+		dictionary.add("goodday");
+		dictionary.add("friend");
+		dictionary.add("gooddayfriend");
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+
+	@Test
+	public void testMain() {
+		// this calls the main to execute
+		ValidLongestWord.main(null);
+		
+		// Validating the results
+		assertEquals(28, ValidLongestWord.validFirst.length());
+		assertEquals(27, ValidLongestWord.validSecond.length());
+		assertEquals("ethylenediaminetetraacetates", ValidLongestWord.validFirst);
+		assertEquals("electroencephalographically", ValidLongestWord.validSecond);
+		System.out.println("TestCases for the main method Passed Successfully!!!");
+	}
+
+	@Test
+	public void testIsValidWord() {
+		// Testing the isValidWord validation 
+		assertTrue( ValidLongestWord.isValidWord(dictionary, "gooddayfriend"));
+		assertFalse( ValidLongestWord.isValidWord(dictionary, "friends"));
+		assertFalse( ValidLongestWord.isValidWord(dictionary, "gooddaysfriend"));
+		System.out.println("TestCases for the isValidWord method Passed Successfully!!!");
+	}
+}
